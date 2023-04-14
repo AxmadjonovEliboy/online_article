@@ -46,7 +46,7 @@ public class AuthUser extends Auditable implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private Boolean status = true;
+    private Boolean status;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

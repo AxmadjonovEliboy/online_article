@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 //@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AppErrorDto {
+public class AppErrorDTO {
 
     private Timestamp timestamp;
     private Integer status;
@@ -22,14 +22,12 @@ public class AppErrorDto {
     private String message;
     private String path;
 
-    public AppErrorDto(int value, String s) {
-    }
-
-    public AppErrorDto(String message, WebRequest webRequest, HttpStatus httpStatus) {
+    //    @Builder
+    public AppErrorDTO(String message, WebRequest webRequest, HttpStatus httpStatus) {
         this(message, ((ServletWebRequest) webRequest).getRequest().getRequestURI(), httpStatus);
     }
 
-    public AppErrorDto(String message, String path, HttpStatus httpStatus) {
+    public AppErrorDTO(String message, String path, HttpStatus httpStatus) {
         this.timestamp = Timestamp.valueOf(LocalDateTime.now());
         this.status = httpStatus.value();
         this.code = httpStatus.getReasonPhrase();
@@ -37,20 +35,11 @@ public class AppErrorDto {
         this.path = path;
     }
 
-
-    public AppErrorDto(HttpStatus status, String message, String path) {
+    public AppErrorDTO(String error, HttpStatus status) {
+        this.message = error;
         this.timestamp = Timestamp.valueOf(LocalDateTime.now());
         this.status = status.value();
         this.code = status.getReasonPhrase();
-        this.message = message;
-        this.path = path;
-    }
-
-    public AppErrorDto(String error, HttpStatus internalServerError) {
-        this.message = error;
-        this.timestamp = Timestamp.valueOf(LocalDateTime.now());
-        this.status = internalServerError.value();
-        this.code = internalServerError.getReasonPhrase();
 
     }
 }

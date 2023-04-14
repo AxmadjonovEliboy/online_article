@@ -1,4 +1,4 @@
-package uz.boom.core_project_jwt.dto;
+package uz.boom.core_project_jwt.dto.auth;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class SessionDto {
+public class SessionDTO {
     private String accessToken;
     private String refreshToken;
     private String tokenType;

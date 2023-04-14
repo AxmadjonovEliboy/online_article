@@ -1,6 +1,7 @@
-package uz.boom.core_project_jwt.dto;
+package uz.boom.core_project_jwt.dto.auth;
 
 import lombok.*;
+import uz.boom.core_project_jwt.dto.base.BaseDTO;
 
 /**
  * @author Jarvis on Sat 13:20. 08/04/23
@@ -10,7 +11,8 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthLoginDto {
+@ToString
+public class AuthLoginDTO implements BaseDTO {
     public String email;
     public String password;
 }

@@ -12,9 +12,9 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import uz.boom.core_project_jwt.exception.NotFoundException;
 import uz.boom.core_project_jwt.repository.AuthUserRepository;
 
 /**
@@ -29,7 +29,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> repository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found!!"));
+                .orElseThrow(() -> new NotFoundException("USER NOT FOUND!!"));
 
     }
 

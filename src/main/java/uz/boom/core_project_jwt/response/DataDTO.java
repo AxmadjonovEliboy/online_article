@@ -9,30 +9,30 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DataDto<T> {
+public class DataDTO<T>  {
     protected T data;
 
-    protected AppErrorDto error;
+    protected AppErrorDTO error;
 
     protected boolean success;
 
     private Long totalCount;
 
-    public DataDto(boolean success) {
+    public DataDTO(boolean success) {
         this.success = success;
     }
 
-    public DataDto(T data) {
+    public DataDTO(T data) {
         this.data = data;
         this.success = true;
     }
 
-    public DataDto(AppErrorDto error) {
+    public DataDTO(AppErrorDTO error) {
         this.error = error;
         this.success = false;
     }
 
-    public DataDto(T data, Long totalCount) {
+    public DataDTO(T data, Long totalCount) {
         this.data = data;
         this.success = true;
         this.totalCount = totalCount;

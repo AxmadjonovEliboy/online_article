@@ -7,7 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import uz.boom.core_project_jwt.dto.SessionDto;
+import uz.boom.core_project_jwt.dto.auth.SessionDTO;
 
 import java.security.Key;
 import java.util.Date;
@@ -64,11 +64,11 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public SessionDto createSessionDto(UserDetails user) {
+    public SessionDTO createSessionDto(UserDetails user) {
 
         String accessToken = generateAccessToken(new HashMap<>(), user);
         String refreshToken = generateRefreshToken(new HashMap<>(), user);
-        return SessionDto.builder()
+        return SessionDTO.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .tokenType("JWT")
