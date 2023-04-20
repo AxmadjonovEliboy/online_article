@@ -12,10 +12,9 @@ import java.util.Objects;
 @AllArgsConstructor
 public enum Role {
 
-    ADMIN("admin"),
-    USER("user"),
-    EMPLOYEE("employee"),
-    SUPPER_ADMIN("supper_admin");
+    ADMIN("ADMIN"),
+    USER("USER"),
+    SUPPER_ADMIN("SUPPER_ADMIN");
 
     private final String name;
 

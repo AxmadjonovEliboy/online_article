@@ -1,10 +1,12 @@
 package uz.boom.core_project_jwt.entity.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -30,13 +32,16 @@ public abstract class Auditable implements BaseEntity {
     @Column(name = "create_at", columnDefinition = "TIMESTAMP default NOW()")
     private LocalDateTime createAt;
 
+    @JsonIgnore
+    @CreatedBy
+    private Long createdBy;
+
     @LastModifiedDate
     @UpdateTimestamp
     private LocalDateTime updateAt;
 
     private Boolean deleted = false;
 
-    private Boolean blocked = false;
 
 
 }

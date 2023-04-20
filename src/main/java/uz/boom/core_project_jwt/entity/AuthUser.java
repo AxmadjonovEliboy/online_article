@@ -10,7 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uz.boom.core_project_jwt.entity.base.Auditable;
-import uz.boom.core_project_jwt.enums.Gender;
+import uz.boom.core_project_jwt.enums.Language;
 import uz.boom.core_project_jwt.enums.Role;
 
 import java.util.Collection;
@@ -44,9 +44,11 @@ public class AuthUser extends Auditable implements UserDetails {
     private Role role;
 
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private Language language;
 
     private Boolean status;
+
+    private Boolean isNonLocked;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -70,7 +72,7 @@ public class AuthUser extends Auditable implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return status;
+        return isNonLocked;
     }
 
     @Override
@@ -80,6 +82,6 @@ public class AuthUser extends Auditable implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return status;
     }
 }

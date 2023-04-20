@@ -10,8 +10,7 @@ public abstract class AbstractController<S extends BaseService> implements BaseC
     public final S service;
     protected final static String API = "/api";
     protected final static String VERSION = "/v1";
-
-    protected final    static String PATH = API + VERSION;
+    protected final static String PATH = API + VERSION;
 
 
 }

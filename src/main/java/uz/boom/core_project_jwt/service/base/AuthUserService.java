@@ -33,6 +33,17 @@ public interface AuthUserService extends BaseService {
 
 
     /**
+     * Get Long
+     *
+     * @param dto AuthRegisterDto
+     * @return DataDto
+     * @throws RuntimeException if email is exist
+     * @apiNote security config written  3.0.0 v
+     */
+    Long create(AuthUserCreateDTO dto);
+
+
+    /**
      * Get AuthUserDto
      *
      * @return DataDto
@@ -44,6 +55,11 @@ public interface AuthUserService extends BaseService {
     List<AuthUserDTO> getAllByCriteria(AuthCriteria criteria);
 
 
+    /**
+     *
+     * @param id
+     * @return AuthUserDTO
+     */
     AuthUserDTO get(Long id);
 
     Long update(AuthUserUpdateDTO dto);

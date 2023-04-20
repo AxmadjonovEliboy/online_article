@@ -3,6 +3,7 @@ package uz.boom.core_project_jwt.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.boom.core_project_jwt.controller.base.AbstractController;
 import uz.boom.core_project_jwt.criteria.AuthCriteria;
@@ -16,6 +17,9 @@ import java.util.List;
 /**
  * @author Jarvis on Sat 11:14. 08/04/23
  */
+
+//@CrossOrigin(origins = "https://main.d1bvq2ei1fv6tu.amplifyapp.com")
+
 @RestController
 @Slf4j
 public class AuthUserController extends AbstractController<AuthUserServiceImpl> {
@@ -39,7 +43,16 @@ public class AuthUserController extends AbstractController<AuthUserServiceImpl> 
                 new DataDTO<>(service.register(dto)));
     }
 
+    @PostMapping(value = PATH + "/auth/create")
+    @PreAuthorize("hasAuthority('SUPPER_ADMIN')")
+    public ResponseEntity<DataDTO<Long>> create(@RequestBody AuthUserCreateDTO dto) {
+        log.info("REST:  AuthRegisterDTO : {}  ", dto);
+        return ResponseEntity.ok(
+                new DataDTO<>(service.create(dto)));
+    }
+
     @GetMapping(value = PATH + "/auth/users")
+    @PreAuthorize("hasAuthority('SUPPER_ADMIN')")
     public ResponseEntity<DataDTO<List<AuthUserDTO>>> getAll() {
         log.info("REST:  List Of Users : getAll() ");
         return ResponseEntity.ok(
@@ -47,20 +60,21 @@ public class AuthUserController extends AbstractController<AuthUserServiceImpl> 
     }
 
     @PostMapping(value = PATH + "/auth/users-by-criteria")
+    @PreAuthorize("hasAuthority('SUPPER_ADMIN')")
     public ResponseEntity<DataDTO<List<AuthUserDTO>>> getAllByCriteria(@RequestBody AuthCriteria criteria) {
         log.info("REST: List of user by AuthCriteria : {}  ", criteria);
         return ResponseEntity.ok(
                 new DataDTO<>(service.getAllByCriteria(criteria)));
     }
 
-    @GetMapping(value = PATH + "/auth/{id}")
+    @GetMapping(value = PATH + "/auth/get/{id}")
     public ResponseEntity<DataDTO<AuthUserDTO>> get(@PathVariable(name = "id") Long userId) {
         log.info("REST:  Get User by id : {}  ", userId);
         return ResponseEntity.ok(
                 new DataDTO<>(service.get(userId)));
     }
 
-    @PutMapping(value = PATH + "/auth")
+    @PutMapping(value = PATH + "/auth/update")
     public ResponseEntity<DataDTO<Long>> update(@RequestBody AuthUserUpdateDTO dto) {
         log.info("REST:  AuthUserUpdate : {}  ", dto);
         return ResponseEntity.ok(
@@ -68,6 +82,7 @@ public class AuthUserController extends AbstractController<AuthUserServiceImpl> 
     }
 
     @DeleteMapping(value = PATH + "/auth/{id}")
+    @PreAuthorize("hasAuthority('SUPPER_ADMIN')")
     public ResponseEntity<DataDTO<Long>> delete(@PathVariable(name = "id") Long id) {
         log.info("REST:  Delete User by : {}  ", id);
         return ResponseEntity.ok(

@@ -1,11 +1,11 @@
 server:
-  port: 8080
+  port: 6666
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=security_jwt
+    url: jdbc:postgresql://localhost:5432/eliboy
     username: postgres
-    password: 777
+    password: 20012023
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
@@ -15,6 +15,7 @@ spring:
       hibernate:
         format_sql: true
     open-in-view: true
+
 
 springdoc:
   swagger-ui:

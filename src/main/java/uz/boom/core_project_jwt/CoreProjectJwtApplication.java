@@ -4,9 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import uz.boom.core_project_jwt.entity.AuthUser;
-import uz.boom.core_project_jwt.enums.Gender;
+import uz.boom.core_project_jwt.enums.Language;
 import uz.boom.core_project_jwt.enums.Role;
 import uz.boom.core_project_jwt.repository.AuthUserRepository;
 
@@ -21,7 +22,7 @@ public class CoreProjectJwtApplication {
         SpringApplication.run(CoreProjectJwtApplication.class, args);
     }
 
-    //    @Bean
+    @Bean
     public void run() throws Exception {
         CommandLineRunner runner1 = (a) -> {
             AuthUser user = AuthUser.builder()
@@ -29,10 +30,12 @@ public class CoreProjectJwtApplication {
                     .email("jarvis@gmail.com")
                     .password(passwordEncoder.encode("jarvis"))
                     .phoneNumber("+998997777777")
-                    .role(Role.ADMIN)
-                    .gender(Gender.MALE)
+                    .role(Role.SUPPER_ADMIN)
+                    .language(Language.UZB)
                     .status(true)
+                    .isNonLocked(true)
                     .build();
+            user.setCreatedBy(-1L);
             repository.save(user);
         };
         runner1.run("s", "b");

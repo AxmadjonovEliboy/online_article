@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import uz.boom.core_project_jwt.criteria.AuthCriteria;
 import uz.boom.core_project_jwt.dto.auth.*;
 import uz.boom.core_project_jwt.entity.AuthUser;
+import uz.boom.core_project_jwt.enums.Language;
 import uz.boom.core_project_jwt.enums.Role;
 import uz.boom.core_project_jwt.exception.BadRequestException;
 import uz.boom.core_project_jwt.exception.NotFoundException;
@@ -33,7 +34,7 @@ public class AuthUserServiceImpl extends AbstractService<AuthUserRepository, Aut
     private final PasswordEncoder encoder;
 
     public AuthUserServiceImpl(AuthUserRepository repository,
-                               @Qualifier("authUserMapperImpl") AuthUserMapper mapper,
+                               AuthUserMapper mapper,
                                AuthenticationManager authenticationManager,
                                AuthUserRepository repository1,
                                JwtService jwtService, PasswordEncoder encoder) {
@@ -67,8 +68,26 @@ public class AuthUserServiceImpl extends AbstractService<AuthUserRepository, Aut
         }
         AuthUser authUser = mapper.fromRegisterDTO(dto);
         authUser.setRole(Role.USER);
+        authUser.setLanguage(Language.UZB);
         authUser.setPassword(encoder.encode(dto.getPassword()));
         authUser.setStatus(Boolean.TRUE);
+        authUser.setIsNonLocked(Boolean.TRUE);
+        AuthUser savedUser = repository.save(authUser);
+        return savedUser.getId();
+    }
+
+    @Override
+    public Long create(AuthUserCreateDTO dto) {
+        Optional<AuthUser> savedAuthUser = repository.findByPhoneNumberOrEmail(dto.getPhoneNumber(), dto.getEmail());
+        if (savedAuthUser.isPresent()) {
+            throw new BadRequestException("THIS EMAIL OR PHONE NUMBER ALREADY EXIST");
+        }
+        AuthUser authUser = mapper.fromCreateDTO(dto);
+        authUser.setRole(Role.ADMIN);
+        authUser.setLanguage(Language.UZB);
+        authUser.setPassword(encoder.encode(dto.getPassword()));
+        authUser.setStatus(Boolean.TRUE);
+        authUser.setIsNonLocked(Boolean.TRUE);
         AuthUser savedUser = repository.save(authUser);
         return savedUser.getId();
     }
