@@ -22,7 +22,7 @@ public class CoreProjectJwtApplication {
         SpringApplication.run(CoreProjectJwtApplication.class, args);
     }
 
-    @Bean
+//    @Bean
     public void run() throws Exception {
         CommandLineRunner runner1 = (a) -> {
             AuthUser user = AuthUser.builder()

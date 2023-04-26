@@ -17,7 +17,7 @@ import java.util.List;
  * @author Jarvis on Sun 01:12. 16/04/23
  */
 
-//@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "http://16.16.110.106", allowCredentials = "true")
 
 @RestController
 public class QuizController extends AbstractController<QuizServiceImpl> {

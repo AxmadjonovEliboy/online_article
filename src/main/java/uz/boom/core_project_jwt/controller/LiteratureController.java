@@ -15,7 +15,7 @@ import java.util.List;
  * @author Jarvis on Tue 03:28. 18/04/23
  */
 
-//@CrossOrigin(origins = "https://main.d1bvq2ei1fv6tu.amplifyapp.com")
+//@CrossOrigin(origins = "http://16.16.110.106", allowCredentials = "true")
 
 @RestController
 public class LiteratureController extends AbstractController<LiteratureServiceImpl> {
