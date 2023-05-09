@@ -26,9 +26,9 @@ public class CoreProjectJwtApplication {
     public void run() throws Exception {
         CommandLineRunner runner1 = (a) -> {
             AuthUser user = AuthUser.builder()
-                    .fullName("Jarvis")
-                    .email("jarvis@gmail.com")
-                    .password(passwordEncoder.encode("jarvis"))
+                    .fullName("Jahongir")
+                    .email("jahongir@gmail.com")
+                    .password(passwordEncoder.encode("jahongir123"))
                     .phoneNumber("+998997777777")
                     .role(Role.SUPPER_ADMIN)
                     .language(Language.UZB)

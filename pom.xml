@@ -132,7 +132,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>spring-online-article_v3</finalName>
+        <finalName>spring-online-article_v13</finalName>
     </build>
 
 </project>
