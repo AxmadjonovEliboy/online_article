@@ -1,11 +1,11 @@
 server:
-  port: 6666
+  port: 8080
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/eliboy
+    url: jdbc:postgresql://localhost:5432/******
     username: postgres
-    password: 20012023
+    password: ********
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
